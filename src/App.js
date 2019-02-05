@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import { findLastIndex, times, constant, map } from 'underscore';
-import { Button, Navbar, Nav, BDiv, InputGroup, Form } from 'bootstrap-4-react';
-import './App.scss';
+// import { Route } from 'react-router-dom';
+// import { Button, Navbar, Nav, Jumbotron, InputGroup, Form, Container } from 'bootstrap-4-react';
 
 const App = () => {
 
@@ -70,21 +70,16 @@ const App = () => {
 
   return (
     <Fragment>
-      <Navbar expand='lg' bg='dark'>
-        <Navbar.Nav>
-          <Nav.ItemLink href='#' active>Home</Nav.ItemLink>
-        </Navbar.Nav>
-      </Navbar>
-      <BDiv bg='dark' text='center white' p='5'>
-        <input type='number' onChange={updateFirstInput} value={firstInput} />
-        <input type='number' onChange={updateSecondInput} value={secondInput} />
+      <div>
+          <input type='number' onChange={updateFirstInput} value={firstInput} />
+          <input type='number' onChange={updateSecondInput} value={secondInput} />
+          <button primary onClick={initHelper}>Make Easy</button>
         <div>
-          <Button primary onClick={initHelper}>Make Easy</Button>
           <p>
             {
               (toAddition)
                 ? map(toAddition, ((num, id) =>
-                  <span key={id}>
+                  <span key={id} mr='3'>
                     {
                       (findLastIndex(toAddition) === id)
                         ? num
@@ -96,16 +91,14 @@ const App = () => {
             }
           </p>
         </div>
-        <InputGroup>
-          <Form.Input type='number' onChange={updateThirdInput} value={gameState.userAnswer} />
-          <InputGroup.Append>
-            <Button primary onClick={setUserAnswer}>Check Answer</Button>
-          </InputGroup.Append>
-        </InputGroup>
-        <Fragment>
+        <div>
+          <input type='number' onChange={updateThirdInput} value={gameState.userAnswer} />
+            <button primary onClick={setUserAnswer}>Check Answer</button>
+        </div>
+        <div>
           {
             (!gameState.isCorrect && gameState.answerAttemps >= 4) 
-              ? <Button warning onClick={displayAnswerGiveup}>Give Up 😞</Button>
+              ? <button warning onClick={displayAnswerGiveup}>Give Up 😞</button>
               : ''
           }
           {
@@ -113,11 +106,9 @@ const App = () => {
               ? <p>The answer is {gameState.correctAnswer}!</p>
               : ''
           }
-        </Fragment>
-        <div>
-          <Button success onClick={resetGameState}>Reset 👈</Button>
         </div>
-      </BDiv>
+        <button success onClick={resetGameState}>Reset 👈</button>
+      </div>
     </Fragment>
   );
 };
