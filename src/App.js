@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import { findLastIndex, times, constant, map } from 'underscore';
+import { Button, Navbar, Nav } from 'bootstrap-4-react';
 import './App.scss';
 
 const App = () => {
@@ -68,47 +69,54 @@ const App = () => {
   };
 
   return (
-    <div className='wrap'>
-      <input type='number' onChange={updateFirstInput} value={firstInput} />
-      <input type='number' onChange={updateSecondInput} value={secondInput} />
-      <div>
-        <button onClick={initHelper}>Make Easy</button>
-        <p>
+    <Fragment>
+      <Navbar expand='lg' dark>
+        <Navbar.Nav>
+          <Nav.ItemLink href='#' active>Home</Nav.ItemLink>
+        </Navbar.Nav>
+      </Navbar>
+      <div className='wrap'>
+        <input type='number' onChange={updateFirstInput} value={firstInput} />
+        <input type='number' onChange={updateSecondInput} value={secondInput} />
+        <div>
+          <button onClick={initHelper}>Make Easy</button>
+          <p>
+            {
+              (toAddition)
+                ? map(toAddition, ((num, id) =>
+                  <span key={id}>
+                    {
+                      (findLastIndex(toAddition) === id)
+                        ? num
+                        : num + '+'
+                    }
+                  </span>
+                ))
+                : ''
+            }
+          </p>
+        </div>
+        <div>
+          <input type='number' onChange={updateThirdInput} value={gameState.userAnswer} />
+          <Button primary lg onClick={setUserAnswer}>Check Answer</Button>
+        </div>
+        <Fragment>
           {
-            (toAddition)
-              ? map(toAddition, ((num, id) =>
-                <span key={id}>
-                  {
-                    (findLastIndex(toAddition) === id)
-                      ? num
-                      : num + '+'
-                  }
-                </span>
-              ))
+            (!gameState.isCorrect && gameState.answerAttemps >= 4) 
+              ? <button onClick={displayAnswerGiveup}>Give Up :(</button>
               : ''
           }
-        </p>
+          {
+            (gameState.isCorrect || gameState.hasGiveup)
+              ? <p>The answer is {gameState.correctAnswer}!</p>
+              : ''
+          }
+        </Fragment>
+        <div>
+          <button onClick={resetGameState}>Reset</button>
+        </div>
       </div>
-      <div>
-        <input type='number' onChange={updateThirdInput} value={gameState.userAnswer} />
-        <button onClick={setUserAnswer}>Check Answer</button>
-      </div>
-      <Fragment>
-        {
-          (!gameState.isCorrect && gameState.answerAttemps >= 4) 
-            ? <button onClick={displayAnswerGiveup}>Give Up :(</button>
-            : ''
-        }
-        {
-          (gameState.isCorrect || gameState.hasGiveup)
-            ? <p>The answer is {gameState.correctAnswer}!</p>
-            : ''
-        }
-      </Fragment>
-      <div>
-        <button onClick={resetGameState}>Reset</button>
-      </div>
-    </div>
+    </Fragment>
   );
 };
 
