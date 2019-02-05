@@ -73,7 +73,7 @@ const App = () => {
       <div>
           <input type='number' onChange={updateFirstInput} value={firstInput} />
           <input type='number' onChange={updateSecondInput} value={secondInput} />
-          <button primary onClick={initHelper}>Make Easy</button>
+          <button onClick={initHelper}>Make Easy 👍</button>
         <div>
           <p>
             {
