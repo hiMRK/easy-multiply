@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import { findLastIndex, times, constant, map } from 'underscore';
-import './App.css';
+import './App.scss';
 
 const App = () => {
 
