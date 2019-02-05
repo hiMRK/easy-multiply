@@ -4,19 +4,19 @@ self.__precacheManifest = [
     "url": "/easy-multiply/static/js/runtime~main.1258a69e.js"
   },
   {
-    "revision": "fcf4501dc8ac1a71a9fa",
-    "url": "/easy-multiply/static/js/main.fcf4501d.chunk.js"
+    "revision": "f4dd5012adc9e064acd1",
+    "url": "/easy-multiply/static/js/main.f4dd5012.chunk.js"
   },
   {
     "revision": "6c7d33b37ff073b266f9",
     "url": "/easy-multiply/static/js/1.6c7d33b3.chunk.js"
   },
   {
-    "revision": "fcf4501dc8ac1a71a9fa",
-    "url": "/easy-multiply/static/css/main.0e8e6cc2.chunk.css"
+    "revision": "f4dd5012adc9e064acd1",
+    "url": "/easy-multiply/static/css/main.11357a2b.chunk.css"
   },
   {
-    "revision": "443f0cba6d748faf374c1ef6e6758536",
+    "revision": "3af12ea451c1848fb5e197a1cceda843",
     "url": "/easy-multiply/index.html"
   }
 ];
