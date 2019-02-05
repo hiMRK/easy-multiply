@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import { findLastIndex, times, constant, map } from 'underscore';
-import { Button, Navbar, Nav, BDiv } from 'bootstrap-4-react';
+import { Button, Navbar, Nav, BDiv, InputGroup, Form } from 'bootstrap-4-react';
 import './App.scss';
 
 const App = () => {
@@ -79,7 +79,7 @@ const App = () => {
         <input type='number' onChange={updateFirstInput} value={firstInput} />
         <input type='number' onChange={updateSecondInput} value={secondInput} />
         <div>
-          <button onClick={initHelper}>Make Easy</button>
+          <Button primary onClick={initHelper}>Make Easy</Button>
           <p>
             {
               (toAddition)
@@ -96,10 +96,12 @@ const App = () => {
             }
           </p>
         </div>
-        <div>
-          <input type='number' onChange={updateThirdInput} value={gameState.userAnswer} />
-          <Button primary lg onClick={setUserAnswer}>Check Answer</Button>
-        </div>
+        <InputGroup>
+          <Form.Input type='number' onChange={updateThirdInput} value={gameState.userAnswer} />
+          <InputGroup.Append>
+            <Button primary onClick={setUserAnswer}>Check Answer</Button>
+          </InputGroup.Append>
+        </InputGroup>
         <Fragment>
           {
             (!gameState.isCorrect && gameState.answerAttemps >= 4) 
