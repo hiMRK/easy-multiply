@@ -71,47 +71,45 @@ const App = () => {
   return (
     <Fragment>
       <div>
-          <input type='number' onChange={updateFirstInput} value={firstInput} />
-          <input type='number' onChange={updateSecondInput} value={secondInput} />
-          <button onClick={initHelper}>Make Easy 👍</button>
-        <div>
-          <p>
-            {
-              (toAddition)
-                ? map(toAddition, ((num, id) =>
-                  <span key={id} mr='3'>
-                    {
-                      (findLastIndex(toAddition) === id)
-                        ? num
-                        : num + '+'
-                    }
-                  </span>
-                ))
-                : ''
-            }
-          </p>
-        </div>
-        <div>
-          <input type='number' onChange={updateThirdInput} value={gameState.userAnswer} />
-            <button onClick={setUserAnswer}>Check Answer 🙈</button>
-        </div>
-        <div>
-          {
-            (!gameState.isCorrect && gameState.answerAttemps >= 4) 
-              ? <button onClick={displayAnswerGiveup}>Give Up 😞</button>
-              : ''
-          }
-          {
-            (gameState.isCorrect || gameState.hasGiveup)
-              ? 
-                (gameState.isCorrect === true)
-                  ? <p>Yes! The answer is {gameState.userAnswer}! 🥳</p>
-                  : <p>The answer is {gameState.correctAnswer}! Better luck solving it next time! 🦂</p>
-              : ''
-          }
-        </div>
-        <button onClick={resetGameState}>Reset 👈</button>
+        <input type='number' onChange={updateFirstInput} value={firstInput} />
+        <input type='number' onChange={updateSecondInput} value={secondInput} />
+        <button onClick={initHelper}>Make Easy 👍</button>
       </div>
+      <p>
+        {
+          (toAddition)
+            ? map(toAddition, ((num, id) =>
+              <span key={id} mr='3'>
+                {
+                  (findLastIndex(toAddition) === id)
+                    ? num
+                    : num + '+'
+                }
+              </span>
+            ))
+            : ''
+        }
+      </p>
+      <div>
+        <input type='number' onChange={updateThirdInput} value={gameState.userAnswer} />
+        <button onClick={setUserAnswer}>Check Answer 🙈</button>
+      </div>
+      <div>
+        {
+          (!gameState.isCorrect && gameState.answerAttemps >= 2) 
+            ? <button onClick={displayAnswerGiveup}>Give Up 😞</button>
+            : ''
+        }
+        {
+          (gameState.isCorrect || gameState.hasGiveup)
+            ? 
+              (gameState.isCorrect === true)
+                ? <p>Yes! The answer is {gameState.userAnswer}! 🥳</p>
+                : <p>The answer is {gameState.correctAnswer}! Better luck solving it next time! 🦂</p>
+            : ''
+        }
+      </div>
+      <button onClick={resetGameState}>Reset 👈</button>
     </Fragment>
   );
 };

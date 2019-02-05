@@ -3,20 +3,22 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 import App from './App';
 import Test from './Test';
+import Nav from './Nav';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
 
 const ROUTING = (
   <BrowserRouter basename={process.env.PUBLIC_URL}>
     <div>
-      <ul>
+      {/* <ul>
         <li>
           <Link to="/">Home</Link>
         </li>
         <li>
           <Link to="/test">Users</Link>
         </li>
-      </ul>
+      </ul> */}
+      <Nav />
       <Switch>
         <Route exact path="/" component={App} />
         <Route exact path="/test" component={Test} />
