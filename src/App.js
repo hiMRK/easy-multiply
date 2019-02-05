@@ -93,21 +93,24 @@ const App = () => {
         </div>
         <div>
           <input type='number' onChange={updateThirdInput} value={gameState.userAnswer} />
-            <button primary onClick={setUserAnswer}>Check Answer</button>
+            <button onClick={setUserAnswer}>Check Answer 🙈</button>
         </div>
         <div>
           {
             (!gameState.isCorrect && gameState.answerAttemps >= 4) 
-              ? <button warning onClick={displayAnswerGiveup}>Give Up 😞</button>
+              ? <button onClick={displayAnswerGiveup}>Give Up 😞</button>
               : ''
           }
           {
             (gameState.isCorrect || gameState.hasGiveup)
-              ? <p>The answer is {gameState.correctAnswer}!</p>
+              ? 
+                (gameState.isCorrect === true)
+                  ? <p>Yes! The answer is {gameState.userAnswer}! 🥳</p>
+                  : <p>The answer is {gameState.correctAnswer}! Better luck solving it next time! 🦂</p>
               : ''
           }
         </div>
-        <button success onClick={resetGameState}>Reset 👈</button>
+        <button onClick={resetGameState}>Reset 👈</button>
       </div>
     </Fragment>
   );

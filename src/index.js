@@ -4,24 +4,26 @@ import './index.scss';
 import App from './App';
 import Test from './Test';
 import * as serviceWorker from './serviceWorker';
-import { BrowserRouter, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
 
 const ROUTING = (
-<BrowserRouter>
-  <div>
-    <ul>
-      <li>
-        <Link to="/">Home</Link>
-      </li>
-      <li>
-        <Link to="/test">Users</Link>
-      </li>
-    </ul>
-    <Route exact path="/" component={App} />
-    <Route path="/test" component={Test} />
-  </div>
-</BrowserRouter> 
-)
+  <BrowserRouter basename={process.env.PUBLIC_URL}>
+    <div>
+      <ul>
+        <li>
+          <Link to="/">Home</Link>
+        </li>
+        <li>
+          <Link to="/test">Users</Link>
+        </li>
+      </ul>
+      <Switch>
+        <Route exact path="/" component={App} />
+        <Route exact path="/test" component={Test} />
+      </Switch>
+    </div>
+  </BrowserRouter> 
+);
 
 ReactDOM.render(ROUTING, document.getElementById('root'));
 

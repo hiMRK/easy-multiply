@@ -2,3 +2,12 @@ html, body {
   margin: 0;
   padding: 0;
 }
+ul {
+  margin: 0;
+  padding: 10px 0;
+  li {
+    text-decoration: underline;
+    display: inline-block;
+    margin-right: 10px;
+  }
+}
