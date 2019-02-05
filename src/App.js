@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import { findLastIndex, times, constant, map } from 'underscore';
-import { Button, Navbar, Nav } from 'bootstrap-4-react';
+import { Button, Navbar, Nav, BDiv } from 'bootstrap-4-react';
 import './App.scss';
 
 const App = () => {
@@ -70,12 +70,12 @@ const App = () => {
 
   return (
     <Fragment>
-      <Navbar expand='lg' dark>
+      <Navbar expand='lg' bg='dark'>
         <Navbar.Nav>
           <Nav.ItemLink href='#' active>Home</Nav.ItemLink>
         </Navbar.Nav>
       </Navbar>
-      <div className='wrap'>
+      <BDiv bg='dark' text='center white' p='5'>
         <input type='number' onChange={updateFirstInput} value={firstInput} />
         <input type='number' onChange={updateSecondInput} value={secondInput} />
         <div>
@@ -103,7 +103,7 @@ const App = () => {
         <Fragment>
           {
             (!gameState.isCorrect && gameState.answerAttemps >= 4) 
-              ? <button onClick={displayAnswerGiveup}>Give Up :(</button>
+              ? <Button warning onClick={displayAnswerGiveup}>Give Up 😞</Button>
               : ''
           }
           {
@@ -113,9 +113,9 @@ const App = () => {
           }
         </Fragment>
         <div>
-          <button onClick={resetGameState}>Reset</button>
+          <Button success onClick={resetGameState}>Reset 👈</Button>
         </div>
-      </div>
+      </BDiv>
     </Fragment>
   );
 };
