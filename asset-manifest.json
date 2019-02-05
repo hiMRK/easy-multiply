@@ -1,13 +1,13 @@
 {
   "main.css": "/easy-multiply/static/css/main.12e46a97.chunk.css",
-  "main.js": "/easy-multiply/static/js/main.9d1d82f6.chunk.js",
-  "main.js.map": "/easy-multiply/static/js/main.9d1d82f6.chunk.js.map",
+  "main.js": "/easy-multiply/static/js/main.92f1a4cd.chunk.js",
+  "main.js.map": "/easy-multiply/static/js/main.92f1a4cd.chunk.js.map",
   "static/js/1.6c7d33b3.chunk.js": "/easy-multiply/static/js/1.6c7d33b3.chunk.js",
   "static/js/1.6c7d33b3.chunk.js.map": "/easy-multiply/static/js/1.6c7d33b3.chunk.js.map",
   "runtime~main.js": "/easy-multiply/static/js/runtime~main.1258a69e.js",
   "runtime~main.js.map": "/easy-multiply/static/js/runtime~main.1258a69e.js.map",
   "static/css/main.12e46a97.chunk.css.map": "/easy-multiply/static/css/main.12e46a97.chunk.css.map",
   "index.html": "/easy-multiply/index.html",
-  "precache-manifest.9b81b630455e7fe98e69284da045fe04.js": "/easy-multiply/precache-manifest.9b81b630455e7fe98e69284da045fe04.js",
+  "precache-manifest.dbcc8c1e891a7b22c95baac9242a828e.js": "/easy-multiply/precache-manifest.dbcc8c1e891a7b22c95baac9242a828e.js",
   "service-worker.js": "/easy-multiply/service-worker.js"
 }
