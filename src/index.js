@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
 import App from './App';
-import Test from './Test';
+import Howto from './Howto';
 import Navigation from './Nav';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
@@ -13,7 +13,7 @@ const ROUTING = (
       <Navigation />
       <Switch>
         <Route exact path="/" component={App} />
-        <Route exact path="/test" component={Test} />
+        <Route exact path="/howto" component={Howto} />
       </Switch>
     </div>
   </BrowserRouter> 
@@ -21,7 +21,4 @@ const ROUTING = (
 
 ReactDOM.render(ROUTING, document.getElementById('root'));
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
 serviceWorker.unregister();
