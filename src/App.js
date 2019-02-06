@@ -1,7 +1,6 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import { findLastIndex, times, constant, map } from 'underscore';
-// import { Route } from 'react-router-dom';
-// import { Button, Navbar, Nav, Jumbotron, InputGroup, Form, Container } from 'bootstrap-4-react';
+import { Button, Alert, Jumbotron, Form, Container, Row, Col, Lead, Display2, Display4 } from 'bootstrap-4-react';
 
 const App = () => {
 
@@ -22,10 +21,15 @@ const App = () => {
   });
 
   // setup addition show
-  const setAddition = () => 
+  const setAddition = () => {
     (parseFloat(firstInput) > parseFloat(secondInput)) 
       ? setToAddition(times(secondInput, constant(firstInput))) 
       : setToAddition(times(firstInput, constant(secondInput)));
+    if(gameState.isCorrect) setGameState({
+      ...GAME_STATE,
+      correctAnswer: firstInput * secondInput
+    });
+  };
 
   // combine functions
   const initHelper = () => {
@@ -49,6 +53,7 @@ const App = () => {
       isCorrect: (gameState.correctAnswer === parseFloat(gameState.userAnswer)) ? true : false,
       answerAttemps: (!gameState.isCorrect) ? gameState.answerAttemps + 1 : gameState.answerAttemps = 0
     });
+    console.log(gameState)
   };
 
   // set give up status
@@ -69,48 +74,56 @@ const App = () => {
   };
 
   return (
-    <Fragment>
+    <Container py='5'>
+      <Row mb='4'>
+        <Col><Form.Input lg type='number' placeholder='Enter First Number' onChange={updateFirstInput} value={firstInput} /></Col>
+        <Col><Form.Input lg type='number' placeholder='Enter Second Number' onChange={updateSecondInput} value={secondInput} /></Col>
+        <Col><Button primary outline lg onClick={initHelper}>Make Easy 👍</Button></Col>
+      </Row>
+      { 
+        toAddition &&
+          <Alert info mb='4'>
+            <Lead mb='0'>
+              {
+                map(toAddition, ((num, id) =>
+                  <span key={id}>
+                    { (findLastIndex(toAddition) === id) ? num : num + '+' }
+                  </span>
+                ))
+              }
+            </Lead>
+          </Alert>
+      }
+      <Row>
+        <Col><Form.Input lg type='number' placeholder='Enter Your Answer' onChange={updateThirdInput} value={gameState.userAnswer} /></Col>
+        <Col><Button success lg onClick={setUserAnswer}>Check Answer 🙈</Button></Col>
+      </Row>
       <div>
-        <input type='number' onChange={updateFirstInput} value={firstInput} />
-        <input type='number' onChange={updateSecondInput} value={secondInput} />
-        <button onClick={initHelper}>Make Easy 👍</button>
-      </div>
-      <p>
+        { (!gameState.isCorrect && gameState.answerAttemps > 0) && <Alert danger mt='4'><Lead mb='0'>Incorrect</Lead></Alert> }
         {
-          (toAddition)
-            ? map(toAddition, ((num, id) =>
-              <span key={id} mr='3'>
-                {
-                  (findLastIndex(toAddition) === id)
-                    ? num
-                    : num + '+'
-                }
-              </span>
-            ))
-            : ''
-        }
-      </p>
-      <div>
-        <input type='number' onChange={updateThirdInput} value={gameState.userAnswer} />
-        <button onClick={setUserAnswer}>Check Answer 🙈</button>
-      </div>
-      <div>
-        {
-          (!gameState.isCorrect && gameState.answerAttemps >= 2) 
-            ? <button onClick={displayAnswerGiveup}>Give Up 😞</button>
+          (!gameState.isCorrect && gameState.answerAttemps >= 3) 
+            ? <Button warning outline lg onClick={displayAnswerGiveup}>Give Up 😞</Button>
             : ''
         }
         {
           (gameState.isCorrect || gameState.hasGiveup)
             ? 
               (gameState.isCorrect === true)
-                ? <p>Yes! The answer is {gameState.userAnswer}! 🥳</p>
-                : <p>The answer is {gameState.correctAnswer}! Better luck solving it next time! 🦂</p>
+                ? 
+                  <Jumbotron bg='success' text='center white' my='4'>
+                    <Display2>Yes! The answer is {gameState.correctAnswer}! 🥳</Display2>
+                  </Jumbotron>
+                : <Jumbotron bg='seconday' text='center dark' my='4'>
+                    <Display4>
+                      <p>The answer is {gameState.correctAnswer}!</p> 
+                      Better luck solving it next time! 🦂
+                    </Display4>
+                  </Jumbotron>
             : ''
         }
       </div>
-      <button onClick={resetGameState}>Reset 👈</button>
-    </Fragment>
+      { (gameState.isCorrect || gameState.hasGiveup) && <Button danger outline lg onClick={resetGameState}>Reset 👈</Button> }
+    </Container>
   );
 };
 

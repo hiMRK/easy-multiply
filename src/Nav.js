@@ -1,18 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Navbar } from 'bootstrap-4-react';
 import './nav.scss';
 
-const Nav = () => {
+const Navigation = () => {
   return (
-    <ul>
-      <li>
-        <Link to="/">Home</Link>
-      </li>
-      <li>
-        <Link to="/test">Users</Link>
-      </li>
-    </ul>
+    <Navbar p='3' dark bg='dark'>
+      <Navbar.Nav>
+        <li><Link to='/'>Home</Link></li>
+        <li><Link to='/test'>How to</Link></li>
+      </Navbar.Nav>
+    </Navbar>
   );
 };
-
-export default Nav;
+export default Navigation;
