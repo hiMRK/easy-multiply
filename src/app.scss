@@ -152,6 +152,7 @@ $title-scale: 8;
   .container {
     background: #fff;
     padding: 60px;
+    border-radius: 18px;
   }
   &__addition {
     background: $color-orange;
@@ -200,5 +201,32 @@ $title-scale: 8;
         }
       }
     }
+  }
+}
+
+// helper
+.helper {
+  transition: 1s ease;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 50vw;
+  background: $color-orange;
+  padding: 60px;
+  border-radius: 18px;
+  @include hover-shadow($color-orange);
+  &[data-state='helper--active'] {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+  &[data-state='helper--inactive'] {
+    opacity: 0;
+    transform: translate(-50%, 100px);
+  }
+  .para {
+    color: #fff;
+  }
+  &__list {
+    margin: 0 0 30px;
   }
 }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { findLastIndex, times, constant, map } from 'underscore';
+import Helper from './Helper';
 import './app.scss';
 
 const App = () => {
@@ -9,6 +10,7 @@ const App = () => {
   const [firstInput, setFirstInput] = useState('');
   const [secondInput, setSecondInput] = useState('');
   const [toAddition, setToAddition] = useState('');
+  const [helperState, setHelperState] = useState(false);
 
   // setup the first/second input numbers
   const updateFirstInput = (e) => setFirstInput(e.target.value);
@@ -64,6 +66,7 @@ const App = () => {
     });
   };
 
+  // reset
   const resetGameState = () => {
     setGameState({
       ...GAME_STATE
@@ -73,13 +76,16 @@ const App = () => {
     setToAddition('');
   };
 
+  // helper
+  const showHelper = () => setHelperState(!helperState);
+
   return (
     <>
       <div className='hero'>
         <div className='container'>
           <h1 className='title title--h1'>Learn Multiplication the Easy Way</h1>
           <p className='para para--title'>A multiplication questions goes in, addition comes out</p>
-          <button className='btn btn--default'>Find out how!</button>
+          <button onClick={showHelper} className='btn btn--default'>Find out how!</button>
         </div>
       </div>
       <div className='app'>
@@ -89,31 +95,30 @@ const App = () => {
             <input type='number' placeholder='Second Number' className='input' onChange={updateSecondInput} value={secondInput} />
             <button onClick={initHelper} className='btn btn--default'>Make Easy <span role='img' aria-label='Emoji-ThumpsUp'>👍</span></button>
           </div>
-          { 
-            toAddition &&
-              <>
-                <div className='app__addition space--mb'>
-                  <p className='para para--title'>Solve this question with addition:</p>
+          { toAddition &&
+            <>
+              <div className='app__addition space--mb'>
+                <p className='para para--title'>Solve this question with addition:</p>
+                <div className='flex'>
+                  {
+                    map(toAddition, ((num, id) =>
+                      <span key={id} className='addition__text para'>{ (findLastIndex(toAddition) === id) ? num : num + ' +' }</span>
+                    ))
+                  }
+                </div>
+              </div>
+              <div className='app__answer space--mb'>
                   <div className='flex'>
-                    {
-                      map(toAddition, ((num, id) =>
-                        <span key={id} className='addition__text para'>{ (findLastIndex(toAddition) === id) ? num : num + ' +' }</span>
-                      ))
-                    }
+                    <input type='number' placeholder='Your Answer' className='input' onChange={updateThirdInput} value={gameState.userAnswer} />
+                    <button onClick={setUserAnswer} className='btn btn--success'>Check Answer <span role='img' aria-label='Emoji-HidingMonkey'>🙈</span></button>
                   </div>
-                </div>
-                <div className='app__answer space--mb'>
-                    <div className='flex'>
-                      <input type='number' placeholder='Your Answer' className='input' onChange={updateThirdInput} value={gameState.userAnswer} />
-                      <button onClick={setUserAnswer} className='btn btn--success'>Check Answer <span role='img' aria-label='Emoji-HidingMonkey'>🙈</span></button>
-                    </div>
-                </div>
-              </>
+              </div>
+            </>
           }
           <div className='app__result'>
             <div className='result__wrong'>
               <div className='flex'>
-                { (!gameState.isCorrect && gameState.answerAttemps >= 1) && <h2 className='title title--h2 title--wrong'>Incorrect</h2>}
+                { (!gameState.isCorrect && gameState.answerAttemps >= 1) && <h2 className='title title--h2'>Incorrect... Keep Trying!</h2>}
                 { (!gameState.isCorrect && gameState.answerAttemps >= 3) && <button onClick={displayAnswerGiveup} className='btn btn--wrong'>Give Up <span role='img' aria-label='Emoji-Sad' className='emoji'>😞</span></button> }
               </div>
             </div>
@@ -130,6 +135,9 @@ const App = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div className='helper' data-state={helperState ? 'helper--active' : 'helper--inactive'}>
+        <Helper />
       </div>
     </>
   );
