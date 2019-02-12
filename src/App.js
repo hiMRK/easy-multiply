@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { findLastIndex, times, constant, map } from 'underscore';
+import './app.scss';
 
 const App = () => {
 
@@ -72,56 +73,70 @@ const App = () => {
   };
 
   return (
-    <div>
-      <div>
-        <input type='number' placeholder='Enter First Number' onChange={updateFirstInput} value={firstInput} />
-        <input type='number' placeholder='Enter Second Number' onChange={updateSecondInput} value={secondInput} />
-        <button onClick={initHelper}>Make Easy <span role='img' aria-label='Emoji-ThumpsUp'>👍</span></button>
+    <>
+      <div className='hero'>
+        <div className='container'>
+          <h1 className='title title__h1'>Learn Multiplication the Easy Way</h1>
+          <p class='para para__title'>A multiplication questions goes in, addition comes out</p>
+          <button className='btn btn--default'>Find out how!</button>
+        </div>
       </div>
-      { 
-        toAddition &&
-          <div>
-            <p>
-              {
-                map(toAddition, ((num, id) =>
-                  <span key={id}>
-                    { (findLastIndex(toAddition) === id) ? num : num + '+' }
-                  </span>
-                ))
-              }
-            </p>
+      <div className='app'>
+        <div className='container'>
+          <div className='flex flex--mb'>
+            <input type='number' placeholder='First Number' className='input' onChange={updateFirstInput} value={firstInput} />
+            <input type='number' placeholder='Second Number' className='input' onChange={updateSecondInput} value={secondInput} />
+            <button onClick={initHelper} className='btn btn--default'>Make Easy <span role='img' aria-label='Emoji-ThumpsUp'>👍</span></button>
           </div>
-      }
-      <div>
-        <input type='number' placeholder='Enter Your Answer' onChange={updateThirdInput} value={gameState.userAnswer} />
-        <button onClick={setUserAnswer}>Check Answer <span role='img' aria-label='Emoji-HidingMonkey'>🙈</span></button>
-      </div>
-      <div>
-        { (!gameState.isCorrect && gameState.answerAttemps > 0) && <div><p>Incorrect</p></div> }
-        {
-          (!gameState.isCorrect && gameState.answerAttemps >= 3) 
-            ? <button onClick={displayAnswerGiveup}>Give Up <span role='img' aria-label='Emoji-Sad'>😞</span></button>
-            : ''
-        }
-        {
-          (gameState.isCorrect || gameState.hasGiveup)
-            ? 
-              (gameState.isCorrect === true)
+          { 
+            toAddition &&
+              <div>
+                <p>
+                  {
+                    map(toAddition, ((num, id) =>
+                      <span key={id}>
+                        { (findLastIndex(toAddition) === id) ? num : num + '+' }
+                      </span>
+                    ))
+                  }
+                </p>
+              </div>
+          }
+          <div>
+            <input type='number' placeholder='Enter Your Answer' onChange={updateThirdInput} value={gameState.userAnswer} />
+            <button onClick={setUserAnswer}>Check Answer <span role='img' aria-label='Emoji-HidingMonkey'>🙈</span></button>
+          </div>
+          <div>
+            { (!gameState.isCorrect && gameState.answerAttemps > 0) && <div><p>Incorrect</p></div> }
+            {
+              (!gameState.isCorrect && gameState.answerAttemps >= 3) 
+                ? <button onClick={displayAnswerGiveup}>Give Up <span role='img' aria-label='Emoji-Sad'>😞</span></button>
+                : ''
+            }
+            {
+              (gameState.isCorrect || gameState.hasGiveup)
                 ? 
-                  <div>
-                    <h2>Yes! The answer is {gameState.correctAnswer}! <span role='img' aria-label='Emoji-StarFace'>🤩</span></h2>
-                  </div>
-                : <div>
-                    <h3>
-                      <p>The answer is {gameState.correctAnswer}!</p> 
-                      <p>Better luck solving it next time! <span role='img' aria-label='Emoji-Scorpion'>🦂</span></p>
-                    </h3>
-                  </div>
-            : ''
-        }
+                  (gameState.isCorrect === true)
+                    ? 
+                      <div>
+                        <h2>Yes! The answer is {gameState.correctAnswer}! <span role='img' aria-label='Emoji-StarFace'>🤩</span></h2>
+                      </div>
+                    : <div>
+                        <h3>
+                          <p>The answer is {gameState.correctAnswer}!</p> 
+                          <p>Better luck solving it next time! <span role='img' aria-label='Emoji-Scorpion'>🦂</span></p>
+                        </h3>
+                      </div>
+                : ''
+            }
+          </div>
+          { 
+            (gameState.isCorrect || gameState.hasGiveup) && 
+            <button onClick={resetGameState}>Reset <span role='img' aria-label='Emoji-FingerPointLeft'>👈</span></button> 
+          }
+        </div>
       </div>
-      { (gameState.isCorrect || gameState.hasGiveup) && <button onClick={resetGameState}>Reset <span role='img' aria-label='Emoji-FingerPointLeft'>👈</span></button> }
-    </div>
+    </>
   );
 };
 
