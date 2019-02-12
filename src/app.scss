@@ -2,8 +2,7 @@
 // font-family: 'Quicksand', sans-serif;
 
 // All brand colors
-$color-dark: #232323;
-$color-green: #5DD39E;
+$color-green: #45ca8e;
 $color-orange: #FB4D3D;
 $color-purple: #E40066;
 $color-blue: #345995;
@@ -38,10 +37,16 @@ $title-scale: 8;
   font-family: 'Fredoka One', cursive;
   line-height: 1.25;
   @for $i from 1 through 6 {
-    &__h#{$i} {
+    &--h#{$i} {
       font-size: $title-size + ($title-scale * (6 - $i));
       margin: 0 0 ($title-scale * (6 - $i) + px);
     }
+  }
+  &--wrong {
+    color: $color-purple;
+  }
+  &--success {
+    color: $color-green;
   }
 }
 
@@ -49,7 +54,7 @@ $title-scale: 8;
 .para {
   font-family: 'Quicksand', sans-serif;
   margin: 0 0 18px;
-  &__title {
+  &--title {
     font-size: 30px;
     margin: 0 0 30px;
   }
@@ -66,6 +71,30 @@ $title-scale: 8;
       @include hover-shadow($color-blue);
     }
   }
+  &--success {
+    border-color: $color-green;
+    background: $color-green;
+    color: #fff;
+    &:hover {
+      @include hover-shadow($color-green);
+    }
+  }
+  &--wrong {
+    border-color: $color-purple;
+    background: $color-purple;
+    color: #fff;
+    &:hover {
+      @include hover-shadow($color-purple);
+    }
+  }
+  &--warning {
+    border-color: $color-orange;
+    background: $color-orange;
+    color: #fff;
+    &:hover {
+      @include hover-shadow($color-orange);
+    }
+  }
   &:hover {
     transform: translateY(-8px);
   }
@@ -75,6 +104,7 @@ $title-scale: 8;
 .input {
   @extend %default-selects;
   border-color: $color-blue;
+  color: $color-blue;
 }
 
 // Container wrapper
@@ -93,8 +123,20 @@ $title-scale: 8;
       margin-right: 30px;
     }
   }
+}
+
+// Space 
+.space {
   &--mb {
     margin-bottom: 60px;
+  }
+}
+
+// Emoji
+.emoji {
+  display: inline-block;
+  &--flip {
+    transform: scaleX(-1);
   }
 }
 
@@ -110,5 +152,53 @@ $title-scale: 8;
   .container {
     background: #fff;
     padding: 60px;
+  }
+  &__addition {
+    background: $color-orange;
+    padding: 30px 60px;
+    border-radius: 12px;
+    text-align: center;
+    .para {
+      color: #fff;
+      &--title {
+        margin: 0;
+      }
+    }
+    .flex {
+      justify-content: center;
+      * {
+        flex: 0 0 auto;
+        margin: 10px 10px 0 0;
+      }
+    }
+    .addition {
+      &__text {
+        color: #fff;
+        font-size: 40px;
+      }
+    }
+  }
+  &__result {
+    .result {
+      &__wrong {
+        .flex {
+          align-items: center;
+          * {
+            flex: 0 0 auto;
+          }
+          .title {
+            margin-bottom: 0;
+          }
+        }
+      }
+      &__correct {
+        text-align: center;
+        .title {
+          p {
+            margin: 0 0 10px;
+          }
+        }
+      }
+    }
   }
 }

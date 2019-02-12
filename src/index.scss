@@ -1,9 +1,11 @@
+$color-dark: #232323;
 body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   line-height: 1.6;
   font-size: 18px;
+  color: $color-dark;
   * {
     box-sizing: inherit;
   }
