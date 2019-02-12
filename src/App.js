@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { findLastIndex, times, constant, map } from 'underscore';
-import { Button, Alert, Jumbotron, Form, Container, Row, Col, Lead, Display2, Display4 } from 'bootstrap-4-react';
 
 const App = () => {
 
@@ -53,7 +52,6 @@ const App = () => {
       isCorrect: (gameState.correctAnswer === parseFloat(gameState.userAnswer)) ? true : false,
       answerAttemps: (!gameState.isCorrect) ? gameState.answerAttemps + 1 : gameState.answerAttemps = 0
     });
-    console.log(gameState)
   };
 
   // set give up status
@@ -74,16 +72,16 @@ const App = () => {
   };
 
   return (
-    <Container py='5'>
-      <Row mb='4'>
-        <Col><Form.Input lg type='number' placeholder='Enter First Number' onChange={updateFirstInput} value={firstInput} /></Col>
-        <Col><Form.Input lg type='number' placeholder='Enter Second Number' onChange={updateSecondInput} value={secondInput} /></Col>
-        <Col><Button primary outline lg onClick={initHelper}>Make Easy 👍</Button></Col>
-      </Row>
+    <div>
+      <div>
+        <input type='number' placeholder='Enter First Number' onChange={updateFirstInput} value={firstInput} />
+        <input type='number' placeholder='Enter Second Number' onChange={updateSecondInput} value={secondInput} />
+        <button onClick={initHelper}>Make Easy <span role='img' aria-label='Emoji-ThumpsUp'>👍</span></button>
+      </div>
       { 
         toAddition &&
-          <Alert info mb='4'>
-            <Lead mb='0'>
+          <div>
+            <p>
               {
                 map(toAddition, ((num, id) =>
                   <span key={id}>
@@ -91,18 +89,18 @@ const App = () => {
                   </span>
                 ))
               }
-            </Lead>
-          </Alert>
+            </p>
+          </div>
       }
-      <Row>
-        <Col><Form.Input lg type='number' placeholder='Enter Your Answer' onChange={updateThirdInput} value={gameState.userAnswer} /></Col>
-        <Col><Button success lg onClick={setUserAnswer}>Check Answer 🙈</Button></Col>
-      </Row>
       <div>
-        { (!gameState.isCorrect && gameState.answerAttemps > 0) && <Alert danger mt='4'><Lead mb='0'>Incorrect</Lead></Alert> }
+        <input type='number' placeholder='Enter Your Answer' onChange={updateThirdInput} value={gameState.userAnswer} />
+        <button onClick={setUserAnswer}>Check Answer <span role='img' aria-label='Emoji-HidingMonkey'>🙈</span></button>
+      </div>
+      <div>
+        { (!gameState.isCorrect && gameState.answerAttemps > 0) && <div><p>Incorrect</p></div> }
         {
           (!gameState.isCorrect && gameState.answerAttemps >= 3) 
-            ? <Button warning outline lg onClick={displayAnswerGiveup}>Give Up 😞</Button>
+            ? <button onClick={displayAnswerGiveup}>Give Up <span role='img' aria-label='Emoji-Sad'>😞</span></button>
             : ''
         }
         {
@@ -110,20 +108,20 @@ const App = () => {
             ? 
               (gameState.isCorrect === true)
                 ? 
-                  <Jumbotron bg='success' text='center white' my='4'>
-                    <Display2>Yes! The answer is {gameState.correctAnswer}! 🥳</Display2>
-                  </Jumbotron>
-                : <Jumbotron bg='seconday' text='center dark' my='4'>
-                    <Display4>
+                  <div>
+                    <h2>Yes! The answer is {gameState.correctAnswer}! <span role='img' aria-label='Emoji-StarFace'>🤩</span></h2>
+                  </div>
+                : <div>
+                    <h3>
                       <p>The answer is {gameState.correctAnswer}!</p> 
-                      Better luck solving it next time! 🦂
-                    </Display4>
-                  </Jumbotron>
+                      <p>Better luck solving it next time! <span role='img' aria-label='Emoji-Scorpion'>🦂</span></p>
+                    </h3>
+                  </div>
             : ''
         }
       </div>
-      { (gameState.isCorrect || gameState.hasGiveup) && <Button danger outline lg onClick={resetGameState}>Reset 👈</Button> }
-    </Container>
+      { (gameState.isCorrect || gameState.hasGiveup) && <button onClick={resetGameState}>Reset <span role='img' aria-label='Emoji-FingerPointLeft'>👈</span></button> }
+    </div>
   );
 };
 
