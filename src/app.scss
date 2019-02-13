@@ -215,15 +215,15 @@ $title-scale: 8;
   padding: 60px;
   border-radius: 18px;
   @include hover-shadow($color-orange);
+  pointer-events: none;
+  z-index: 1;;
   &[data-state='helper--active'] {
     opacity: 1;
     transform: translate(-50%, -50%);
-    z-index: 1;
   }
   &[data-state='helper--inactive'] {
     opacity: 0;
     transform: translate(-50%, 100px);
-    z-index: -1;
   }
   .para {
     color: #fff;
