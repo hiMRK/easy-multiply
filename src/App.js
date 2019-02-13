@@ -118,7 +118,7 @@ const App = () => {
           <div className='app__result'>
             <div className='result__wrong'>
               <div className='flex'>
-                { (!gameState.isCorrect && gameState.answerAttemps >= 1) && <h2 className='title title--h2'>Incorrect... Keep Trying!</h2>}
+                { (!gameState.isCorrect && gameState.answerAttemps >= 1) && <h2 className='title title--h2'><span className='title--wrong'>Incorrect...</span> Keep Trying!</h2>}
                 { (!gameState.isCorrect && gameState.answerAttemps >= 3) && <button onClick={displayAnswerGiveup} className='btn btn--wrong'>Give Up <span role='img' aria-label='Emoji-Sad' className='emoji'>😞</span></button> }
               </div>
             </div>
